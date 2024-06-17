@@ -1,5 +1,7 @@
 package com.assignment.chessboard.domain.utils
 
+import android.util.Log
+
 fun knightPathFinder(boardSize: Int, startX: Int, startY: Int, endX: Int, endY: Int, maxMoves: Int): List<List<Pair<Int, Int>>> {
     val directions = listOf(
         Pair(2, 1), Pair(2, -1), Pair(-2, 1), Pair(-2, -1),
@@ -15,6 +17,7 @@ fun knightPathFinder(boardSize: Int, startX: Int, startY: Int, endX: Int, endY: 
         if (current.path.size > maxMoves + 1) continue
         if (current.x == endX && current.y == endY && current.path.size <= maxMoves + 1) {
             results.add(current.path)
+            Log.d("KnightPathFinder", "Found path: $current.path")
             continue
         }
 
@@ -28,5 +31,6 @@ fun knightPathFinder(boardSize: Int, startX: Int, startY: Int, endX: Int, endY: 
         }
     }
 
+    Log.d("KnightPathFinder", "Total paths found: ${results.size}")
     return results
 }

@@ -28,6 +28,9 @@ class ChessboardViewModel(application: Application) : AndroidViewModel(applicati
     private val _paths = MutableLiveData<List<List<Pair<Int, Int>>>>(emptyList())
     val paths: LiveData<List<List<Pair<Int, Int>>>> get() = _paths
 
+    private val _noSolutionFound = MutableLiveData(false)
+    val noSolutionFound: LiveData<Boolean> get() = _noSolutionFound
+
     var startX by mutableIntStateOf(-1)
     var startY by mutableIntStateOf(-1)
     var endX by mutableIntStateOf(-1)
@@ -60,8 +63,9 @@ class ChessboardViewModel(application: Application) : AndroidViewModel(applicati
             )
             withContext(Dispatchers.Main) {
                 if (result.isEmpty()) {
-                    // handle no solution case
+                    _noSolutionFound.value = true
                 } else {
+                    _noSolutionFound.value = false
                     _paths.value = result
                 }
             }
@@ -76,6 +80,23 @@ class ChessboardViewModel(application: Application) : AndroidViewModel(applicati
         _maxMoves.value = newMaxMoves
     }
 
+    fun onTileSelected(row: Int, col: Int) {
+        if (startX == -1 && startY == -1) {
+            startX = row
+            startY = col
+        } else if (endX == -1 && endY == -1) {
+            endX = row
+            endY = col
+            calculatePaths()
+        } else {
+            startX = row
+            startY = col
+            endX = -1
+            endY = -1
+            _paths.value = emptyList()
+        }
+    }
+
     fun resetBoard() {
         _boardSize.value = 8
         _maxMoves.value = 3
@@ -84,10 +105,7 @@ class ChessboardViewModel(application: Application) : AndroidViewModel(applicati
         endX = -1
         endY = -1
         _paths.value = emptyList()
-    }
-
-    fun undoMove() {
-        // implement undo functionality
+        _noSolutionFound.value = false
     }
 
     fun saveState() {
@@ -103,5 +121,9 @@ class ChessboardViewModel(application: Application) : AndroidViewModel(applicati
                 )
             )
         }
+    }
+
+    fun clearNoSolutionFound() {
+        _noSolutionFound.value = false
     }
 }

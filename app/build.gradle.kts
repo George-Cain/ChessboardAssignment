@@ -78,6 +78,8 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 */
+    implementation(libs.gson)
+
 
     // Room
     implementation(libs.androidx.room.runtime)
