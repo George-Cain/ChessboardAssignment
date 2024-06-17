@@ -5,13 +5,13 @@ This is an Android assignment project aiming to display my skills in Android dev
 ## Overview
 
 The purpose of the app is to display an empty chessboard and give the ability to users to
-designate a start and end position on this board. The application then calculates and displays
+designate a start and end position on the board. The application then calculates and displays
 all potential routes a knight piece could take from the start to the end position in N moves
 (default is 3). If there are no possible solutions, the application will notify the user.
 Users have the option to reset the board and start over. The chessboard can be of any size from
 6x6 to 16x16, and users can select their preferred size. Users also have the ability to set the
 maximum number of moves. The path calculation process does not interfere with the main thread.
-If the application is closed and then reopened, it recalls the last successful solution.
+If the application is closed and then reopened, it recalls the last possible solution.
 
 ## Features
 
@@ -25,10 +25,11 @@ If the application is closed and then reopened, it recalls the last successful s
   routes a knight piece could take from the start to the end position in N moves.
 - The calculation process does not interfere with the main thread.
 - If there are no possible solutions, the app will notify the user with a message.
-- The rendering of the the paths is done using lines of different colors.
-- The app remembers the last successful solution even if the app is closed and reopened using Room.
+- The rendering of the paths is done using lines of different colors.
+- By utilising the library Room, the app remembers the last possible solution even if the app is
+  closed and reopened.
 - The app utilizes the MVVM architecture pattern and clean architecture.
-- The app has unit tests for the view-models.
+- The app has unit tests for the view-model.
 - The structure of the app is easy to understand and follow by trying to utilise the SOLID 
   principles as much as possible.
 - The app uses Coroutines to handle asynchronous tasks.
@@ -83,8 +84,6 @@ because it allows for better separation of concerns and easier testing.
 8. Enjoy!
 
 ## License
-
-MIT License
 
 Copyright (c) [2024] [George Apergis]
 

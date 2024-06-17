@@ -140,8 +140,8 @@ class ChessboardViewModelTest {
         val pathFinder = knightPathFinder(8, 0, 0, 7, 7, 3)
         whenever(pathFinder).thenReturn(mockPath)
 
-        Mockito.mockStatic(Log::class.java).use { mock ->
-            mock.`when` { Log.d(any(), any()) }.thenReturn(0)
+        Mockito.mockStatic(Log::class.java).use {
+            Mockito.`when` { Log.d(any(), any()) }.thenReturn { 0 }
 
             viewModel.onTileSelected(0, 0)
             viewModel.onTileSelected(7, 7)
@@ -157,8 +157,8 @@ class ChessboardViewModelTest {
         try {
             viewModel.isLoading.observeForever(observer)
 
-            Mockito.mockStatic(Log::class.java).use { mock ->
-                mock.`when` { Log.d(any(), any()) }.thenReturn(0)
+            Mockito.mockStatic(Log::class.java).use {
+                Mockito.`when` { Log.d(any(), any()) }.thenReturn { 0 }
 
                 whenever(
                     knightPathFinder(
