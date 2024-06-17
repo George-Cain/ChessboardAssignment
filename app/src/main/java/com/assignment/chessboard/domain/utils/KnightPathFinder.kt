@@ -2,7 +2,14 @@ package com.assignment.chessboard.domain.utils
 
 import android.util.Log
 
-fun knightPathFinder(boardSize: Int, startX: Int, startY: Int, endX: Int, endY: Int, maxMoves: Int): List<List<Pair<Int, Int>>> {
+fun knightPathFinder(
+    boardSize: Int,
+    startX: Int,
+    startY: Int,
+    endX: Int,
+    endY: Int,
+    maxMoves: Int
+): List<List<Pair<Int, Int>>> {
     val directions = listOf(
         Pair(2, 1), Pair(2, -1), Pair(-2, 1), Pair(-2, -1),
         Pair(1, 2), Pair(1, -2), Pair(-1, 2), Pair(-1, -2)

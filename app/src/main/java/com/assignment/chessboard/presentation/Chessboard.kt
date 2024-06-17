@@ -2,6 +2,7 @@ package com.assignment.chessboard.presentation
 
 import android.app.Application
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -18,7 +19,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.assignment.chessboard.presentation.theme.ChessboardAssignmentTheme
+import com.assignment.chessboard.presentation.theme.ChessboardScreenTheme
 import com.assignment.chessboard.presentation.theme.PathColors
 import com.assignment.chessboard.presentation.viewmodel.ChessboardViewModel
 
@@ -34,6 +35,7 @@ fun Chessboard(viewModel: ChessboardViewModel) {
     Box(
         modifier = Modifier
             .padding(top = 16.dp, bottom = 32.dp)
+            .border(4.dp, Color.Black)
             .fillMaxWidth(1f)
             .fillMaxHeight(0.58f)
     ) {
@@ -67,7 +69,7 @@ fun Chessboard(viewModel: ChessboardViewModel) {
             if (startX != -1 && startY != -1) {
                 drawRect(
                     color = Color.Green,
-                    style = Stroke((tileSize*0.1).toFloat()),
+                    style = Stroke((tileSize * 0.1).toFloat()),
                     topLeft = androidx.compose.ui.geometry.Offset(
                         startY * tileSize,
                         startX * tileSize
@@ -78,7 +80,7 @@ fun Chessboard(viewModel: ChessboardViewModel) {
             if (endX != -1 && endY != -1) {
                 drawRect(
                     color = Color.Red,
-                    style = Stroke((tileSize*0.1).toFloat()),
+                    style = Stroke((tileSize * 0.1).toFloat()),
                     topLeft = androidx.compose.ui.geometry.Offset(
                         endY * tileSize,
                         endX * tileSize
@@ -112,7 +114,7 @@ fun Chessboard(viewModel: ChessboardViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun ChessboardPreview() {
-    ChessboardAssignmentTheme {
+    ChessboardScreenTheme {
         Chessboard(viewModel = ChessboardViewModel(application = Application()))
     }
 }

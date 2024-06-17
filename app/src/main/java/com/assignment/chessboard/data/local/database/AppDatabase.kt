@@ -6,20 +6,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.assignment.chessboard.data.local.dao.KnightPathDao
-import com.assignment.chessboard.data.local.entity.KnightPath
+import com.assignment.chessboard.data.local.dao.ChessboardStateDao
+import com.assignment.chessboard.data.local.entity.ChessboardState
 
-@Database(entities = [KnightPath::class], version = 3)
+@Database(entities = [ChessboardState::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun knightPathDao(): KnightPathDao
+    abstract fun chessboardStateDao(): ChessboardStateDao
 
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        val MIGRATION_1_2: Migration = object : Migration(1, 2) {
+        private val MIGRATION_3_4: Migration = object : Migration(3, 4) {
             override fun migrate(db: SupportSQLiteDatabase) {
-                // Since we didn't alter the table, there's nothing else to do here.
+                db.execSQL("ALTER TABLE chessboard_state ADD COLUMN pathJson TEXT")
             }
         }
 
@@ -28,9 +28,9 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "knight_path_database"
+                    "chessboard_state_database"
                 )
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_3_4)
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
